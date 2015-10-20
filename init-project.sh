@@ -19,12 +19,18 @@ else
 fi
 
 DASH=$(echo "${CAMEL}" | ${SED} -E 's/([A-Za-z0-9])([A-Z])/\1-\2/g' | tr '[:upper:]' '[:lower:]')
-INITIALS=$(echo "${CAMEL}" | ${SED} 's/\([A-Z]\)[a-z]*/\1/g' | tr '[:upper:]' '[:lower:]')
+DOTS=$(echo "${DASH}" | ${SED} 's/-/\./g')
+SLASHES=$(echo "${DASH}" | ${SED} 's/-/\//g')
 echo "DASH: ${DASH}"
-echo "INITIALS: ${INITIALS}"
-find -E . -type f ! -regex '^.*/(build|\.git|\.idea)/.*$' -exec sh -c '${1} -i -e "s/JavaSkeleton/${2}/g" -e "s/java-skeleton/${3}/g" -e "s/bin\/js/bin\/${4}/g" ${5}' '_' "${SED}" "${CAMEL}" "${DASH}" "${INITIALS}" '{}' \;
-git mv src/JavaSkeleton.java "src/${CAMEL}.php"
-git mv test/Unit/JavaSkeletonTest.java "test/Unit/${CAMEL}Test.php"
-git mv bin/js "bin/${INITIALS}"
+echo "DOTS: ${DOTS}"
+echo "SLASHES: ${SLASHES}"
+find -E . -type f ! -regex '^.*/(build|\.git|\.idea)/.*$' -exec sh -c '${1} -i -e "s/JavaSkeleton/${2}/g" -e "s/java-skeleton/${3}/g" -e "s/java\.skeleton/${4}/g" ${5}' '_' "${SED}" "${CAMEL}" "${DASH}" "${DOTS}" '{}' \;
+
+mkdir -p "src/main/java/org/funtimecoding/${SLASHES}"
+mkdir -p "src/test/java/org/funtimecoding/${SLASHES}"
+
+git mv src/main/java/org/funtimecoding/java/skeleton/JavaSkeletonMain.java "src/main/java/org/funtimecoding/${SLASHES}/${CAMEL}.java"
+git mv src/test/java/org/funtimecoding/java/skeleton/JavaSkeletonMainTest.java "src/test/java/org/funtimecoding/${SLASHES}/${CAMEL}Test.java"
+
 #rm init-project.sh
 echo "Done. Files were edited and moved using git. Review those changes."
