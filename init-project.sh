@@ -25,12 +25,9 @@ echo "DASH: ${DASH}"
 echo "DOTS: ${DOTS}"
 echo "SLASHES: ${SLASHES}"
 find -E . -type f ! -regex '^.*/(build|\.git|\.idea)/.*$' -exec sh -c '${1} -i -e "s/JavaSkeleton/${2}/g" -e "s/java-skeleton/${3}/g" -e "s/java\.skeleton/${4}/g" ${5}' '_' "${SED}" "${CAMEL}" "${DASH}" "${DOTS}" '{}' \;
-
 mkdir -p "src/main/java/org/funtimecoding/${SLASHES}"
 mkdir -p "src/test/java/org/funtimecoding/${SLASHES}"
-
 git mv src/main/java/org/funtimecoding/java/skeleton/JavaSkeletonMain.java "src/main/java/org/funtimecoding/${SLASHES}/${CAMEL}Main.java"
 git mv src/test/java/org/funtimecoding/java/skeleton/JavaSkeletonMainTest.java "src/test/java/org/funtimecoding/${SLASHES}/${CAMEL}MainTest.java"
-
-#rm init-project.sh
+rm init-project.sh
 echo "Done. Files were edited and moved using git. Review those changes."
