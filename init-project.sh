@@ -30,7 +30,7 @@ mkdir -p "src/main/java/org/funtimecoding/${SLASHES}"
 mkdir -p "src/test/java/org/funtimecoding/${SLASHES}"
 
 git mv src/main/java/org/funtimecoding/java/skeleton/JavaSkeletonMain.java "src/main/java/org/funtimecoding/${SLASHES}/${CAMEL}Main.java"
-git mv src/test/java/org/funtimecoding/java/skeleton/JavaSkeletonMainTest.java "src/test/java/org/funtimecoding/${SLASHES}/${CAMEL}Test.java"
+git mv src/test/java/org/funtimecoding/java/skeleton/JavaSkeletonMainTest.java "src/test/java/org/funtimecoding/${SLASHES}/${CAMEL}MainTest.java"
 
 #rm init-project.sh
 echo "Done. Files were edited and moved using git. Review those changes."
