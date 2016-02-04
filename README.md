@@ -1,12 +1,12 @@
 # JavaSkeleton
 
-Build project.
+Build the project.
 
 ```sh
 ./build.sh
 ```
 
-Run program.
+Run the program.
 
 ```sh
 ./run.sh
