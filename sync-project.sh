@@ -9,15 +9,15 @@ if [ "${TARGET_PROJECT}" = "" ]; then
 fi
 
 if [ ! -d "${TARGET_PROJECT}" ]; then
-    echo "Target directory does not exist."
+    echo "Target directory ${TARGET_PROJECT} does not exist."
 
     exit 1
 fi
 
-CAMEL=$(head -n1 "${TARGET_PROJECT}"/README.md | awk '{ print $2 }' | grep -E '^([A-Z][a-z0-9]+){2,}$') || CAMEL=""
+CAMEL=$(head -n1 "${TARGET_PROJECT}"/README.md | awk '{ print $2 }' | grep -E '^([A-Z]+[a-z0-9]*){2,}$') || CAMEL=""
 
 if [ "${CAMEL}" = "" ]; then
-    echo "Could not determine the target projects name."
+    echo "Could not determine the projects name in ${TARGET_PROJECT}."
 
     exit 1
 fi
@@ -40,5 +40,5 @@ DOTS=$(echo "${DASH}" | ${SED} 's/-/\./g')
 cd "${TARGET_PROJECT}" || exit 1
 rm init-project.sh sync-project.sh
 # shellcheck disable=SC2016
-${FIND} . -type f -regextype posix-extended ! -regex '^.*/(build|target|\.git|\.idea)/.*$' -exec sh -c '${1} -i -e "s/JavaSkeleton/${2}/g" -e "s/java-skeleton/${3}/g" -e "s/java\.skeleton/${4}/g" ${5}' '_' "${SED}" "${CAMEL}" "${DASH}" "${DOTS}" '{}' \;
+${FIND} . -type f -regextype posix-extended ! -regex '^.*/(build|target|\.git|\.idea)/.*$' -exec sh -c '${1} -i -e "s/JavaSkeleton/${2}/g" -e "s/java-skeleton/${3}/g" -e "s/java\.skeleton/${4}/g" "${5}"' '_' "${SED}" "${CAMEL}" "${DASH}" "${DOTS}" '{}' \;
 echo "Done. Files were copied to ${TARGET_PROJECT} and modified. Review those changes."

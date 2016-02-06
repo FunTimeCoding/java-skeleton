@@ -25,7 +25,7 @@ DOTS=$(echo "${DASH}" | ${SED} 's/-/\./g')
 SLASHES=$(echo "${DASH}" | ${SED} 's/-/\//g')
 rm init-project.sh sync-project.sh
 # shellcheck disable=SC2016
-${FIND} . -type f -regextype posix-extended ! -regex '^.*/(build|\.git|\.idea)/.*$' -exec sh -c '${1} -i -e "s/JavaSkeleton/${2}/g" -e "s/java-skeleton/${3}/g" -e "s/java\.skeleton/${4}/g" ${5}' '_' "${SED}" "${CAMEL}" "${DASH}" "${DOTS}" '{}' \;
+${FIND} . -type f -regextype posix-extended ! -regex '^.*/(build|\.git|\.idea)/.*$' -exec sh -c '${1} -i -e "s/JavaSkeleton/${2}/g" -e "s/java-skeleton/${3}/g" -e "s/java\.skeleton/${4}/g" "${5}"' '_' "${SED}" "${CAMEL}" "${DASH}" "${DOTS}" '{}' \;
 mkdir -p src/main/java/org/funtimecoding/"${SLASHES}"
 mkdir -p src/test/java/org/funtimecoding/"${SLASHES}"
 git mv src/main/java/org/funtimecoding/java/skeleton/JavaSkeletonMain.java src/main/java/org/funtimecoding/"${SLASHES}/${CAMEL}"Main.java
