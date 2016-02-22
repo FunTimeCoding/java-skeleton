@@ -1,4 +1,4 @@
 #!/bin/sh -e
 
-rm -rf target
+mvn clean
 rm -rf build
