@@ -8,9 +8,6 @@ public class JavaSkeletonMainTest {
     @Test
     public void testRun() {
         JavaSkeletonMain application = new JavaSkeletonMain();
-
-        int result = application.run();
-
-        assertEquals(result, 0);
+        assertEquals(0, application.run());
     }
 }
