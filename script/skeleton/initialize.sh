@@ -26,9 +26,12 @@ fi
 rm -rf script/skeleton
 DASH=$(echo "${NAME}" | ${SED} --regexp-extended 's/([A-Za-z0-9])([A-Z])/\1-\2/g' | tr '[:upper:]' '[:lower:]')
 INITIALS=$(echo "${NAME}" | ${SED} 's/\([A-Z]\)[a-z]*/\1/g' | tr '[:upper:]' '[:lower:]')
-UNDERSCORE=$(echo "${DASH}" | ${SED} --regexp-extended 's/-/_/g')
+DOTS=$(echo "${DASH}" | ${SED} 's/-/\./g')
+SLASHES=$(echo "${DASH}" | ${SED} 's/-/\//g')
 # shellcheck disable=SC2016
-${FIND} . -regextype posix-extended -type f ! -regex "${EXCLUDE_FILTER}" -exec sh -c '${1} --in-place --expression "s/JavaSkeleton/${2}/g" --expression "s/java-skeleton/${3}/g" --expression "s/java_skeleton/${4}/g" --expression "s/bin\/ss/bin\/${5}/g" --expression "s/js\\\\/${5}\\\\/g" "${6}"' '_' "${SED}" "${NAME}" "${DASH}" "${UNDERSCORE}" "${INITIALS}" '{}' \;
-git mv lib/java_skeleton.sh "lib/${UNDERSCORE}.sh"
-git mv bin/js "bin/${INITIALS}"
+${FIND} . -regextype posix-extended -type f ! -regex "${EXCLUDE_FILTER}" -exec sh -c '${1} --in-place --expression "s/JavaSkeleton/${2}/g" --expression "s/java-skeleton/${3}/g" --expression "s/java\.skeleton/${4}/g" --expression "s/bin\/js/bin\/${5}/g" --expression "s/js\\\\/${5}\\\\/g" "${6}"' '_' "${SED}" "${NAME}" "${DASH}" "${DOTS}" "${INITIALS}" '{}' \;
+mkdir -p "src/main/java/org/funtimecoding/${SLASHES}"
+mkdir -p "src/test/java/org/funtimecoding/${SLASHES}"
+git mv src/main/java/org/funtimecoding/java/skeleton/JavaSkeletonMain.java "src/main/java/org/funtimecoding/${SLASHES}/${NAME}Main.java"
+git mv src/test/java/org/funtimecoding/java/skeleton/JavaSkeletonMainTest.java "src/test/java/org/funtimecoding/${SLASHES}/${NAME}MainTest.java"
 echo "# This dictionary file is for domain language." > "documentation/dictionary/${DASH}.dic"
