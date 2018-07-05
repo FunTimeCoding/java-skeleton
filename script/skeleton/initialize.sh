@@ -34,4 +34,8 @@ mkdir -p "src/main/java/org/funtimecoding/${SLASHES}"
 mkdir -p "src/test/java/org/funtimecoding/${SLASHES}"
 git mv src/main/java/org/funtimecoding/java/skeleton/JavaSkeletonMain.java "src/main/java/org/funtimecoding/${SLASHES}/${NAME}Main.java"
 git mv src/test/java/org/funtimecoding/java/skeleton/JavaSkeletonMainTest.java "src/test/java/org/funtimecoding/${SLASHES}/${NAME}MainTest.java"
+rmdir src/main/java/org/funtimecoding/java/skeleton || true
+rmdir src/test/java/org/funtimecoding/java/skeleton || true
+rmdir src/main/java/org/funtimecoding/java || true
+rmdir src/test/java/org/funtimecoding/java || true
 echo "# This dictionary file is for domain language." > "documentation/dictionary/${DASH}.dic"
