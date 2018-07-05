@@ -3,10 +3,10 @@ package org.funtimecoding.java.skeleton;
 public class JavaSkeletonMain {
     public static void main(String[] args) {
         JavaSkeletonMain application = new JavaSkeletonMain();
-        application.run();
+        System.exit(application.run());
     }
 
-    public int run() {
+    int run() {
         System.out.println("Hello friend.");
 
         return 0;
