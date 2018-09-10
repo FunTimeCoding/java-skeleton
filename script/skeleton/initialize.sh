@@ -29,7 +29,8 @@ INITIALS=$(echo "${NAME}" | ${SED} 's/\([A-Z]\)[a-z]*/\1/g' | tr '[:upper:]' '[:
 DOTS=$(echo "${DASH}" | ${SED} 's/-/\./g')
 SLASHES=$(echo "${DASH}" | ${SED} 's/-/\//g')
 # shellcheck disable=SC2016
-${FIND} . -regextype posix-extended -type f ! -regex "${EXCLUDE_FILTER}" -exec sh -c '${1} --in-place --expression "s/JavaSkeleton/${2}/g" --expression "s/java-skeleton/${3}/g" --expression "s/java\.skeleton/${4}/g" --expression "s/bin\/js/bin\/${5}/g" --expression "s/js\\\\/${5}\\\\/g" "${6}"' '_' "${SED}" "${NAME}" "${DASH}" "${DOTS}" "${INITIALS}" '{}' \;
+${FIND} . -regextype posix-extended -type f ! -regex "${EXCLUDE_FILTER}" -exec sh -c '${1} --in-place --expression "s/JavaSkeleton/${2}/g" --expression "s/java-skeleton/${3}/g" --expression "s/java\.skeleton/${4}/g" "${5}"' '_' "${SED}" "${NAME}" "${DASH}" "${DOTS}" '{}' \;
+${SED} --in-place --expression "s/bin\/js/bin\/${INITIALS}/g" --expression "s/'js'/'${INITIALS}'/g" README.md Vagrantfile Dockerfile
 mkdir -p "src/main/java/org/funtimecoding/${SLASHES}"
 mkdir -p "src/test/java/org/funtimecoding/${SLASHES}"
 git mv src/main/java/org/funtimecoding/java/skeleton/JavaSkeletonMain.java "src/main/java/org/funtimecoding/${SLASHES}/${NAME}Main.java"

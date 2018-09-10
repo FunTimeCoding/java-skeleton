@@ -45,6 +45,7 @@ mkdir -p "${TARGET}/lib"
 cp lib/common.sh "${TARGET}/lib"
 cp .gitignore "${TARGET}"
 cp Vagrantfile "${TARGET}"
+cp Dockerfile "${TARGET}"
 cd "${TARGET}" || exit 1
 echo "${NAME}" | grep --quiet 'Skeleton$' && IS_SKELETON=true || IS_SKELETON=false
 
@@ -56,4 +57,5 @@ DASH=$(echo "${NAME}" | ${SED} --regexp-extended 's/([A-Za-z0-9])([A-Z])/\1-\2/g
 INITIALS=$(echo "${NAME}" | ${SED} 's/\([A-Z]\)[a-z]*/\1/g' | tr '[:upper:]' '[:lower:]')
 DOTS=$(echo "${DASH}" | ${SED} 's/-/\./g')
 # shellcheck disable=SC2016
-${FIND} . -regextype posix-extended -type f ! -regex "${EXCLUDE_FILTER}" -exec sh -c '${1} --in-place --expression "s/JavaSkeleton/${2}/g" --expression "s/java-skeleton/${3}/g" --expression "s/java\.skeleton/${4}/g" --expression "s/bin\/js/bin\/${5}/g" --expression "s/js\\\\/${5}\\\\/g" "${6}"' '_' "${SED}" "${NAME}" "${DASH}" "${DOTS}" "${INITIALS}" '{}' \;
+${FIND} . -regextype posix-extended -type f ! -regex "${EXCLUDE_FILTER}" -exec sh -c '${1} --in-place --expression "s/JavaSkeleton/${2}/g" --expression "s/java-skeleton/${3}/g" --expression "s/java\.skeleton/${4}/g" "${5}"' '_' "${SED}" "${NAME}" "${DASH}" "${DOTS}" '{}' \;
+${SED} --in-place --expression "s/bin\/js/bin\/${INITIALS}/g" --expression "s/'js'/'${INITIALS}'/g" README.md Vagrantfile Dockerfile

@@ -32,7 +32,12 @@ MARKDOWN_FILES=$(${FIND} . -regextype posix-extended -name '*.md' ! -regex "${EX
 BLACKLIST=''
 DICTIONARY=en_US
 mkdir -p tmp
-cat documentation/dictionary/*.dic > tmp/combined.dic
+
+if [ -d documentation/dictionary ]; then
+    cat documentation/dictionary/*.dic > tmp/combined.dic
+else
+    touch tmp/combined.dic
+fi
 
 for FILE in ${MARKDOWN_FILES}; do
     WORDS=$(hunspell -d "${DICTIONARY}" -p tmp/combined.dic -l "${FILE}" | sort | uniq)
@@ -101,7 +106,7 @@ if [ "${CONTINUOUS_INTEGRATION_MODE}" = true ]; then
     done
 else
     # shellcheck disable=SC2016
-    SHELL_SCRIPT_CONCERNS=$(${FIND} . -name '*.sh' -regextype posix-extended ! -regex "${EXCLUDE_FILTER}" -exec sh -c 'shellcheck ${1} || true' '_' '{}' \;)
+    SHELL_SCRIPT_CONCERNS=$(${FIND} . -regextype posix-extended -name '*.sh' ! -regex "${EXCLUDE_FILTER}" -exec sh -c 'shellcheck ${1} || true' '_' '{}' \;)
 
     if [ ! "${SHELL_SCRIPT_CONCERNS}" = '' ]; then
         CONCERN_FOUND=true
