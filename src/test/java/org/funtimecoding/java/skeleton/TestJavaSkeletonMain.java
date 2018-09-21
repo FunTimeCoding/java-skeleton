@@ -1,20 +1,18 @@
 package org.funtimecoding.java.skeleton;
 
-import org.hamcrest.CoreMatchers;
-import org.junit.Test;
+import org.testng.Assert;
+import org.testng.annotations.Test;
 
 import java.io.BufferedReader;
 import java.io.InputStreamReader;
 import java.net.HttpURLConnection;
 import java.net.URL;
 
-import static org.junit.Assert.*;
-
-public class JavaSkeletonMainTest {
+public class TestJavaSkeletonMain {
     @Test
     public void testRun() {
         JavaSkeletonMain application = new JavaSkeletonMain();
-        assertEquals(0, application.run());
+        Assert.assertEquals(application.run(), 0);
     }
 
     @Test
@@ -23,7 +21,7 @@ public class JavaSkeletonMainTest {
             URL locator = new URL("http://example.org");
             HttpURLConnection connection = (HttpURLConnection) locator.openConnection();
             connection.setRequestMethod("GET");
-            assertEquals(200, connection.getResponseCode());
+            Assert.assertEquals(connection.getResponseCode(), 200);
             BufferedReader reader = new BufferedReader(new InputStreamReader(connection.getInputStream()));
             String line;
             StringBuilder buffer = new StringBuilder();
@@ -33,12 +31,10 @@ public class JavaSkeletonMainTest {
             }
 
             reader.close();
-            assertNotEquals("", buffer.toString());
-            assertThat(buffer.toString(), CoreMatchers.containsString("Example Domain"));
-            // TODO: This leads to OutOfMemoryError when running mvn test. How to compare entire buffer content?
-            //assertEquals("test", buffer.toString());
+            Assert.assertNotEquals(buffer.toString(), "");
+            Assert.assertTrue(buffer.toString().contains("Example Domain"));
         } catch (Exception e) {
-            fail(e.getMessage());
+            Assert.fail(e.getMessage());
         }
     }
 }
