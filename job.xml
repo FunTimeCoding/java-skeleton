@@ -41,7 +41,7 @@
   </builders>
   <publishers>
     <hudson.tasks.junit.JUnitResultArchiver plugin="junit@1.24">
-      <testResults>build/junit.xml</testResults>
+      <testResults>target/surefire-reports/junitreports/TEST-*.xml</testResults>
       <keepLongStdio>false</keepLongStdio>
       <healthScaleFactor>1.0</healthScaleFactor>
       <allowEmptyResults>false</allowEmptyResults>
@@ -77,7 +77,7 @@
       <shouldDetectModules>false</shouldDetectModules>
       <dontComputeNew>true</dontComputeNew>
       <doNotResolveRelativePaths>false</doNotResolveRelativePaths>
-      <pattern>build/log/checkstyle-*.xml</pattern>
+      <pattern>target/checkstyle-result.xml</pattern>
     </hudson.plugins.checkstyle.CheckStylePublisher>
     <hudson.tasks.Mailer plugin="mailer@1.21">
       <recipients>funtimecoding@gmail.com</recipients>
