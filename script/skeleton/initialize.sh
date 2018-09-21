@@ -34,7 +34,7 @@ ${SED} --in-place --expression "s/bin\/js/bin\/${INITIALS}/g" --expression "s/'j
 mkdir -p "src/main/java/org/funtimecoding/${SLASHES}"
 mkdir -p "src/test/java/org/funtimecoding/${SLASHES}"
 git mv src/main/java/org/funtimecoding/java/skeleton/JavaSkeletonMain.java "src/main/java/org/funtimecoding/${SLASHES}/${NAME}Main.java"
-git mv src/test/java/org/funtimecoding/java/skeleton/JavaSkeletonMainTest.java "src/test/java/org/funtimecoding/${SLASHES}/${NAME}MainTest.java"
+git mv src/test/java/org/funtimecoding/java/skeleton/TestJavaSkeletonMain.java "src/test/java/org/funtimecoding/${SLASHES}/Test${NAME}Main.java"
 rmdir src/main/java/org/funtimecoding/java/skeleton || true
 rmdir src/test/java/org/funtimecoding/java/skeleton || true
 rmdir src/main/java/org/funtimecoding/java || true
