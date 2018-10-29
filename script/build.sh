@@ -2,7 +2,7 @@
 
 rm -rf build
 script/check.sh --ci-mode
-mvn clean install
-mvn checkstyle:checkstyle
+mvn --quiet clean install
+mvn --quiet checkstyle:checkstyle
 # TODO: Finish implementation, then uncomment.
 #script/docker/build.sh
