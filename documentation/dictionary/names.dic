@@ -4,3 +4,4 @@ virtualbox
 debian
 shellcheck
 netcat
+errorprone
