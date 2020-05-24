@@ -1,5 +1,10 @@
-build
-tmp
-.vagrant
-target
-*.iml
+/build
+/tmp
+/.vagrant
+/debian/files
+/debian/debhelper-build-stamp
+/debian/java-skeleton
+/debian/java-skeleton.substvars
+/documentation/man/*.1
+/.scannerwork
+/target
