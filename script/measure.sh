@@ -71,7 +71,7 @@ if [ "${1}" = --ci-mode ]; then
             break
         fi
 
-        if [ "${SECOND}" = 60 ]; then
+        if [ "${SECOND}" = 20 ]; then
             echo "Timeout reached."
 
             exit 1
