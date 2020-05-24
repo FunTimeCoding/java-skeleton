@@ -1,9 +1,12 @@
 #!/bin/sh -e
 
 DIRECTORY=$(dirname "${0}")
-SCRIPT_DIRECTORY=$(cd "${DIRECTORY}" || exit 1; pwd)
+SCRIPT_DIRECTORY=$(
+    cd "${DIRECTORY}" || exit 1
+    pwd
+)
 # shellcheck source=/dev/null
-. "${SCRIPT_DIRECTORY}/../../lib/common.sh"
+. "${SCRIPT_DIRECTORY}/../../configuration/project.sh"
 TARGET="${1}"
 
 if [ "${TARGET}" = '' ]; then
@@ -41,11 +44,19 @@ mkdir -p "${TARGET}/documentation"
 cp -R documentation/* "${TARGET}/documentation"
 mkdir -p "${TARGET}/script"
 cp -R script/* "${TARGET}/script"
-mkdir -p "${TARGET}/lib"
-cp lib/common.sh "${TARGET}/lib"
+mkdir -p "${TARGET}/debian"
+cp -R debian/* "${TARGET}/debian"
+mkdir -p "${TARGET}/configuration"
+cp -R configuration/* "${TARGET}/configuration"
+mkdir -p "${TARGET}/inventory"
+cp -R inventory/* "${TARGET}/inventory"
 cp .gitignore "${TARGET}"
+cp .shellspec "${TARGET}"
+cp playbook.yaml "${TARGET}"
 cp Vagrantfile "${TARGET}"
 cp Dockerfile "${TARGET}"
+cp Jenkinsfile "${TARGET}"
+cp sonar-project.properties "${TARGET}"
 cp pom.xml "${TARGET}"
 cd "${TARGET}" || exit 1
 echo "${NAME}" | grep --quiet 'Skeleton$' && IS_SKELETON=true || IS_SKELETON=false
@@ -58,5 +69,7 @@ DASH=$(echo "${NAME}" | ${SED} --regexp-extended 's/([A-Za-z0-9])([A-Z])/\1-\2/g
 INITIALS=$(echo "${NAME}" | ${SED} 's/\([A-Z]\)[a-z]*/\1/g' | tr '[:upper:]' '[:lower:]')
 DOTS=$(echo "${DASH}" | ${SED} 's/-/\./g')
 # shellcheck disable=SC2016
-${FIND} . -regextype posix-extended -type f ! -regex "${EXCLUDE_FILTER}" -exec sh -c '${1} --in-place --expression "s/JavaSkeleton/${2}/g" --expression "s/java-skeleton/${3}/g" --expression "s/java\.skeleton/${4}/g" "${5}"' '_' "${SED}" "${NAME}" "${DASH}" "${DOTS}" '{}' \;
+# TODO: Delete after testing the include way works throughout all projects.
+#${FIND} . -regextype posix-extended -type f ! -regex "${EXCLUDE_FILTER}" -exec sh -c '${1} --in-place --expression "s/JavaSkeleton/${2}/g" --expression "s/java-skeleton/${3}/g" --expression "s/java\.skeleton/${4}/g" "${5}"' '_' "${SED}" "${NAME}" "${DASH}" "${DOTS}" '{}' \;
+${FIND} . -regextype posix-extended -type f -regex "${INCLUDE_FILTER}" -exec sh -c '${1} --in-place --expression "s/JavaSkeleton/${2}/g" --expression "s/java-skeleton/${3}/g" --expression "s/java\.skeleton/${4}/g" "${5}"' '_' "${SED}" "${NAME}" "${DASH}" "${DOTS}" '{}' \;
 ${SED} --in-place --expression "s/bin\/js/bin\/${INITIALS}/g" --expression "s/'js'/'${INITIALS}'/g" README.md Vagrantfile Dockerfile

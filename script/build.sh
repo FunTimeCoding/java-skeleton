@@ -1,8 +1,14 @@
 #!/bin/sh -e
 
 rm -rf build
+script/java/build.sh
 script/check.sh --ci-mode
-mvn --quiet clean install
-mvn --quiet checkstyle:checkstyle
-# TODO: Finish implementation, then uncomment.
-#script/docker/build.sh
+script/measure.sh --ci-mode
+script/test.sh --ci-mode
+#SYSTEM=$(uname)
+#
+# TODO: Needs polish.
+#if [ "${SYSTEM}" = Linux ]; then
+#    script/debian/package.sh
+#    script/docker/build.sh
+#fi
