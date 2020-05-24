@@ -15,9 +15,9 @@ if [ "${1}" = --help ]; then
 fi
 
 if [ "${1}" = --ci-mode ]; then
-    script/shell/test.sh --ci-mode
+    #script/shell/test.sh --ci-mode
     script/java/test.sh
 else
-    script/shell/test.sh
+    #script/shell/test.sh
     script/java/test.sh
 fi
