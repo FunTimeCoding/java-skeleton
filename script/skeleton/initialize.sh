@@ -35,6 +35,7 @@ SLASHES=$(echo "${DASH}" | ${SED} 's/-/\//g')
 # TODO: Delete after testing the include way works throughout all projects.
 #${FIND} . -regextype posix-extended -type f ! -regex "${EXCLUDE_FILTER}" -exec sh -c '${1} --in-place --expression "s/JavaSkeleton/${2}/g" --expression "s/java-skeleton/${3}/g" --expression "s/java\.skeleton/${4}/g" "${5}"' '_' "${SED}" "${NAME}" "${DASH}" "${DOTS}" '{}' \;
 ${FIND} . -regextype posix-extended -type f -regex "${INCLUDE_FILTER}" -exec sh -c '${1} --in-place --expression "s/JavaSkeleton/${2}/g" --expression "s/java-skeleton/${3}/g" --expression "s/java\.skeleton/${4}/g" "${5}"' '_' "${SED}" "${NAME}" "${DASH}" "${DOTS}" '{}' \;
+# shellcheck disable=SC1117
 ${SED} --in-place --expression "s/bin\/js/bin\/${INITIALS}/g" --expression "s/'js'/'${INITIALS}'/g" README.md Vagrantfile Dockerfile
 mkdir -p "src/main/java/org/funtimecoding/${SLASHES}"
 mkdir -p "src/test/java/org/funtimecoding/${SLASHES}"
