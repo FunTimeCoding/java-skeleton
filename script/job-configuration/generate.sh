@@ -13,4 +13,4 @@ if [ "${IS_GITHUB}" = true ]; then
 fi
 
 # shellcheck disable=SC2016
-jjm --locator "${REMOTE}" --build-command script/build.sh --junit 'target/surefire-reports/junitreports/TEST-*.xml' --checkstyle target/checkstyle-result.xml --recipients funtimecoding@gmail.com > configuration/job.xml
+jjm --locator "${REMOTE}" --build-command script/build.sh --junit 'target/surefire-reports/junitreports/TEST-*.xml' --checkstyle target/checkstyle-result.xml  --publish target/site/jacoco --recipients funtimecoding@gmail.com > configuration/job.xml

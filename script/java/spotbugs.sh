@@ -1,3 +1,3 @@
 #!/bin/sh -e
 
-mvn spotbugs:gui
+mvn --quiet spotbugs:gui
