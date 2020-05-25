@@ -156,4 +156,8 @@ if [ "${CONCERN_FOUND}" = true ]; then
     exit 2
 fi
 
-script/java/check.sh
+if [ "${CONTINUOUS_INTEGRATION_MODE}" = true ]; then
+    script/java/check.sh --ci-mode
+else
+    script/java/check.sh
+fi
