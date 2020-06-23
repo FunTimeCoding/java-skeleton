@@ -54,6 +54,7 @@
                 <configuration>
                     <consoleOutput>true</consoleOutput>
                     <suppressionsLocation>${project.basedir}/.checkstyle-suppressions.xml</suppressionsLocation>
+                    <linkXRef>false</linkXRef>
                 </configuration>
             </plugin>
 
@@ -166,14 +167,4 @@
             </plugin>
         </plugins>
     </build>
-
-    <reporting>
-        <plugins>
-            <plugin>
-                <groupId>org.apache.maven.plugins</groupId>
-                <artifactId>maven-jxr-plugin</artifactId>
-                <version>3.0.0</version>
-            </plugin>
-        </plugins>
-    </reporting>
 </project>
