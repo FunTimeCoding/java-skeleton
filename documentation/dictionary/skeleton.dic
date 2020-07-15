@@ -9,8 +9,11 @@ UpperCaseSeparated
 ic
 JavaSkeleton
 ss
+su
 ps
+pu
 js
+ju
 src
 LanguageExample
 XmlLibrary
@@ -18,3 +21,4 @@ SpecialName
 MultiWordName
 CamelCaseConvention
 CHANGELOG
+pyskel
