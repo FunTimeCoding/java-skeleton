@@ -58,7 +58,7 @@ cp Dockerfile "${TARGET}"
 cp Jenkinsfile "${TARGET}"
 cp sonar-project.properties "${TARGET}"
 cp pom.xml "${TARGET}"
-cp checkstyle-suppressions.xml "${TARGET}"
+cp .checkstyle-suppressions.xml "${TARGET}"
 cd "${TARGET}" || exit 1
 echo "${NAME}" | grep --quiet 'Skeleton$' && IS_SKELETON=true || IS_SKELETON=false
 
