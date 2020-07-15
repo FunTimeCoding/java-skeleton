@@ -45,4 +45,3 @@ rmdir src/main/java/org/funtimecoding/java/skeleton || true
 rmdir src/test/java/org/funtimecoding/java/skeleton || true
 rmdir src/main/java/org/funtimecoding/java || true
 rmdir src/test/java/org/funtimecoding/java || true
-echo "# This dictionary file is for domain language." >"documentation/dictionary/${DASH}.dic"
