@@ -22,9 +22,12 @@ if [ "${FOUND}" = false ]; then
     WORKING_DIRECTORY=$(pwd)
 
     if [ "${DEVELOPMENT}" = true ]; then
-        docker create --name "${PROJECT_NAME_DASH}" --volume "${WORKING_DIRECTORY}:/${PROJECT_NAME_DASH}" "${VENDOR_NAME_LOWER}/${PROJECT_NAME_DASH}"
+        docker create --name "${PROJECT_NAME_DASH}" \
+            --volume "${WORKING_DIRECTORY}:/${PROJECT_NAME_DASH}" \
+            "${VENDOR_NAME_LOWER}/${PROJECT_NAME_DASH}"
     else
-        docker create --name "${PROJECT_NAME_DASH}" "${VENDOR_NAME_LOWER}/${PROJECT_NAME_DASH}"
+        docker create --name "${PROJECT_NAME_DASH}" \
+            "${VENDOR_NAME_LOWER}/${PROJECT_NAME_DASH}"
     fi
 
     # TODO: Specifying the entry point overrides CMD in Dockerfile. Is this useful, or should all sub commands go through one entry point script? I'm inclined to say one entry point script per project.
